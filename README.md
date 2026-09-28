@@ -34,11 +34,4 @@ dotnet build FrappFresh.sln
 dotnet run --project FrappFresh.Api
 ```
 
-La cadena de conexión se configura mediante `ConnectionStrings:DefaultConnection`.
-Para desarrollo local puede sobrescribirse sin modificar el repositorio:
-
-```bash
-export ConnectionStrings__DefaultConnection="Server=localhost;Port=3306;Database=frappfresh;User=root;Password=TU_PASSWORD;"
-```
-
 El endpoint inicial de verificación es `GET /api/health`.
