@@ -26,3 +26,19 @@ También existe `FrappFresh.Tests` para pruebas automatizadas de servicios y val
 ## Desarrollo
 
 La estructura inicial y los proyectos compilables se encuentran en la rama `develop`.
+
+```bash
+git switch develop
+dotnet restore FrappFresh.sln
+dotnet build FrappFresh.sln
+dotnet run --project FrappFresh.Api
+```
+
+La cadena de conexión se configura mediante `ConnectionStrings:DefaultConnection`.
+Para desarrollo local puede sobrescribirse sin modificar el repositorio:
+
+```bash
+export ConnectionStrings__DefaultConnection="Server=localhost;Port=3306;Database=frappfresh;User=root;Password=TU_PASSWORD;"
+```
+
+El endpoint inicial de verificación es `GET /api/health`.

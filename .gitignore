@@ -1,0 +1,38 @@
+## .NET build output
+[Bb]in/
+[Oo]bj/
+[Aa]rtifacts/
+
+## IDE and editor files
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Test and coverage output
+[Tt]est[Rr]esult*/
+[Cc]overage[Rr]eports*/
+*.coverage
+*.coveragexml
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+
+## Local configuration and secrets
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+secrets.json
+
+## Operating systems
+.DS_Store
+Thumbs.db
+
+## Logs
+*.log
