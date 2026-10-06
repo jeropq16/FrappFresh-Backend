@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FrappFresh.Api\FrappFresh.Api.csproj" />
     <ProjectReference Include="..\FrappFresh.Application\FrappFresh.Application.csproj" />
     <ProjectReference Include="..\FrappFresh.Domain\FrappFresh.Domain.csproj" />
     <ProjectReference Include="..\FrappFresh.Infrastructure\FrappFresh.Infrastructure.csproj" />

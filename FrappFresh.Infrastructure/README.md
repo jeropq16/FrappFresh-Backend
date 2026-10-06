@@ -18,7 +18,9 @@ Las carpetas vacías `Data` y `Persistence/Repositories` de la estructura origin
 
 ## Conexión y ejecución local
 
-La base configurada en este equipo es `FrappFreshDb`, en `localhost:3306`. La conexión está temporalmente en `FrappFresh.Api/appsettings.Development.json`, bajo `ConnectionStrings:DefaultConnection`. La clave JWT, la versión del servidor y las contraseñas de los usuarios de prueba siguen en User Secrets. La conexión se trasladará a variables de entorno más adelante.
+La base configurada es `FrappFreshDb`, en `localhost:3306`. La conexión completa se guarda en User Secrets,
+bajo `ConnectionStrings:DefaultConnection`, junto con la clave JWT y las contraseñas de los usuarios de prueba.
+`FrappFresh.Api/appsettings.Development.json` solo contiene una conexión de referencia sin contraseña.
 
 ```bash
 dotnet tool restore
@@ -28,15 +30,17 @@ dotnet run --project FrappFresh.Api
 
 El perfil local usa `Development`: aplica las migraciones pendientes y ejecuta los seeds. En otros entornos esas opciones están desactivadas por defecto; los seeds rechazan expresamente cualquier entorno distinto de `Development`.
 
-Para otro equipo, ajusta la conexión de `appsettings.Development.json` y configura estos secretos con valores propios:
+Para otro equipo, configura estos secretos con valores propios:
 
 ```bash
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "<conexion-MySQL-local>" --project FrappFresh.Api
 dotnet user-secrets set "Jwt:SigningKey" "<clave-aleatoria-de-al-menos-32-bytes>" --project FrappFresh.Api
 dotnet user-secrets set "Seed:AdminPassword" "<clave-de-prueba-de-al-menos-12-caracteres>" --project FrappFresh.Api
 dotnet user-secrets set "Seed:CustomerPassword" "<otra-clave-de-prueba-de-al-menos-12-caracteres>" --project FrappFresh.Api
 ```
 
-`Database:ServerVersion` usa `8.0.36` por defecto. En este equipo está configurada como secreto con la versión detectada `9.6.0`, con la que se verificaron las migraciones y las pruebas. Fuera de desarrollo puedes usar variables de entorno como `ConnectionStrings__DefaultConnection` y `Jwt__SigningKey`.
+`Database:ServerVersion` usa `8.0.36` por defecto. Ajusta este valor si tu servidor utiliza otra versión.
+Fuera de desarrollo puedes usar variables de entorno como `ConnectionStrings__DefaultConnection` y `Jwt__SigningKey`.
 
 ## Seeds de prueba
 
@@ -67,7 +71,9 @@ Los índices impiden duplicar correo, número de pedido, hash de refresh token y
 - `RotateAsync` devuelve nuevos tokens y revoca el anterior atómicamente. Devuelve `null` si el token no existe, venció, ya fue consumido o pertenece a un usuario inactivo. La concurrencia sobre `RevokedAt` evita dos renovaciones del mismo token.
 - `RevokeAsync` permite cerrar una sesión e invalida futuras renovaciones. Un JWT ya emitido conserva su vigencia hasta su vencimiento; desactivar el usuario o cambiar su rol sí lo invalida en las solicitudes siguientes.
 
-Los contratos de estos servicios están en `Application/Interfaces`, con dos resultados sencillos en `Application/Security`. Faltan los casos de uso y endpoints de registro, login, refresh y logout de las siguientes capas. La integración con una pasarela concreta también queda pendiente.
+Los contratos de estos servicios están en `Application/Interfaces`, con dos resultados sencillos en `Application/Security`.
+Los casos de uso están en `Application/Services` y sus endpoints en `Api/Controllers`.
+La integración con una pasarela concreta queda pendiente.
 
 ## Migraciones y pruebas
 

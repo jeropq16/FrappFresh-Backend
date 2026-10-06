@@ -1,4 +1,4 @@
--using FrappFresh.Application.DTOs.Payments;
+using FrappFresh.Application.DTOs.Payments;
 using FrappFresh.Application.Exceptions;
 using FrappFresh.Application.Interfaces;
 using FrappFresh.Domain.Entities;
