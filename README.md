@@ -35,3 +35,9 @@ dotnet run --project FrappFresh.Api
 ```
 
 El endpoint inicial de verificación es `GET /api/health`.
+
+## Infrastructure
+
+MySQL, las migraciones, los seeds, los repositorios CRUD y los servicios de seguridad están implementados. La API registra estas dependencias y configura JWT Bearer. Los endpoints de negocio y autenticación se realizarán en las siguientes capas.
+
+La conexión local está temporalmente en `FrappFresh.Api/appsettings.Development.json`. Las claves JWT y de los usuarios de prueba siguen en User Secrets. Consulta [la guía de Infrastructure](FrappFresh.Infrastructure/README.md) para iniciar, revisar las cuentas de prueba y ejecutar las pruebas contra MySQL.
